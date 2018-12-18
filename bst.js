@@ -96,7 +96,9 @@ class BinarySearchTree{
     return this.left._findMin();
   }
 
-  
+  print(){
+    
+  }
 }
 
 module.exports = BinarySearchTree;
