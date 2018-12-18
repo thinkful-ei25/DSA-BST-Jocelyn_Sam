@@ -58,6 +58,46 @@ function isBST(bst, min = null, max = null){
 //   return (isBST2(bst.left)&&isBST2(bst.right));
 // }
 
+ 
+/*Third largest node
+Write an algorithm to find the third largest node in a binary search tree
+input:   
+      3
+    /   \
+   5     13
+  / \   /  \
+ 3   7 11  15
+
+ output: 11 
+
+ base case  if (node === null)  return 
+
+ reverse in order traversal 
+
+ max is right most 
+
+ upon finding max move to parent and to that key.left
+ return that. 
+
+*/
+function nthLargest(bst, state){
+  
+  if(bst.right){
+    nthLargest(bst.right, state); 
+    if(state.result) return state.result; 
+  }
+  if(!--state.n){
+    state.result = bst.key; 
+    return state.result; 
+  }
+  if(bst.left){
+    nthLargest(bst.left, state);
+  }
+}
+
+
+
+
 function main(){
   const BST = new BinarySearchTree();
   BST.insert(3, true);
@@ -69,14 +109,20 @@ function main(){
   BST.insert(5, true);
   BST.insert(7, true);
 
-  //console.log(BST);
-  console.log(height(BST));
-  console.log(isBST(BST));
 
-  const BST2 = new BinarySearchTree();
-  BST2.insert(3, true);
-  BST2.insert(4, true);
-  console.log(isBST(BST2));
+
+
+
+  const answer = nthLargest(BST, {n:3}); 
+  console.log(answer); 
+  // //console.log(BST);
+  // console.log(height(BST));
+  // console.log(isBST(BST));
+
+  // const BST2 = new BinarySearchTree();
+  // BST2.insert(3, true);
+  // BST2.insert(4, true);
+  // console.log(isBST(BST2));
 }
 
 main();
