@@ -95,26 +95,46 @@ function nthLargest(bst, state){
   }
 }
 
-
+function isBalanced(bst){
+  let leftHeight;
+  let rightHeight;
+  //base case
+  if(bst === null){
+    return true;
+  }
+  leftHeight = height(bst.left);
+  rightHeight = height(bst.right);
+  console.log('key: '+bst.key,'left: '+leftHeight, 'right: '+rightHeight);
+  //recursive case
+  if((Math.abs(leftHeight-rightHeight)<=1)
+    && isBalanced(bst.left)
+    && isBalanced(bst.right)){
+    return true;
+  }
+  return false;
+  
+}
 
 
 function main(){
   const BST = new BinarySearchTree();
-  BST.insert(3, true);
+  BST.insert(2, true);
   BST.insert(1, true);
-  BST.insert(4, true);
+  BST.insert(3, true);
   BST.insert(6, true);
   BST.insert(9, true);
-  BST.insert(2, true);
+  BST.insert(2.5, true);
   BST.insert(5, true);
-  BST.insert(7, true);
+  BST.insert(0.5, true);
+  BST.insert(0.25,true);
 
 
+  const answer = isBalanced(BST);
+  console.log(answer);
 
 
-
-  const answer = nthLargest(BST, {n:3}); 
-  console.log(answer); 
+  //const answer = nthLargest(BST, {n:3}); 
+  //console.log(answer); 
   // //console.log(BST);
   // console.log(height(BST));
   // console.log(isBST(BST));
